@@ -8,7 +8,7 @@ import Comic from './../Comic';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
-  const {isLoading, currentSearchId, selected} = useSelector(searchPageSelector);
+  const {isLoading, currentSearchId, selected, error} = useSelector(searchPageSelector);
   const [searchTerm, setSearchTerm] = useState('');
 
 
@@ -42,6 +42,7 @@ const SearchPage = () => {
 
       {isLoading && <div>LOADING...</div>}
       {selected && <Comic xkcd={selected} />}
+      {error && <div>There was an error loading the comic...</div>}
     </div>
   );
 };
