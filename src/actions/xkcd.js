@@ -4,7 +4,8 @@ import {
   LOAD_COMIC_INIT,
   LOAD_COMIC_ERROR,
   LOAD_COMIC_SUCCESS,
-  SET_LATEST_COMIC_ID
+  SET_LATEST_COMIC_ID,
+  SEARCH_COMIC_INIT
 } from './../constants/action-types';
 
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
@@ -38,4 +39,9 @@ export const loadComic = (id) => (dispatch) => {
         payload: err
       });
   });
-}
+};
+
+export const searchForComic = (id) => ({
+  type: SEARCH_COMIC_INIT,
+  payload: id
+});

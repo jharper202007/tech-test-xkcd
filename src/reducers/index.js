@@ -1,9 +1,10 @@
-import { LOAD_COMIC_INIT, LOAD_COMIC_SUCCESS, SET_LATEST_COMIC_ID } from './../constants/action-types';
+import { LOAD_COMIC_INIT, LOAD_COMIC_SUCCESS, SET_LATEST_COMIC_ID, SEARCH_COMIC_INIT } from './../constants/action-types';
 
 const initialState = {
   comics: {},
   isLoading: false,
-  latestComicId: null
+  latestComicId: null,
+  currentSearch: null
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +20,7 @@ export default (state = initialState, action) => {
 
     comics[action.payload.num] = action.payload;
     return {
+      ...state,
       isLoading: false,
       comics
     };
@@ -28,6 +30,14 @@ export default (state = initialState, action) => {
     return {
       ...state,
       latestComicId: action.payload
+    };
+  }
+
+  if (action.type === SEARCH_COMIC_INIT) {
+    return {
+      ...state,
+      currentSearch: action.payload,
+      isLoading: true
     };
   }
 

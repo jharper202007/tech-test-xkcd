@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import mostRecentSelector from './selector';
 import { loadComic } from './../../actions/xkcd';
+import Comic from './../Comic';
 
 const MostRecent = () => {
   const dispatch = useDispatch();
@@ -19,16 +20,7 @@ const MostRecent = () => {
   return (
     <div>
       {isLoading && <div>LOADING...</div>}
-      {mostRecent && (
-        <div>
-          <h2>{mostRecent.title}</h2>
-          <img
-            src={mostRecent.img}
-            alt={mostRecent.alt}
-            title={mostRecent.alt}
-          />
-        </div>
-      )}
+      {mostRecent && <Comic xkcd={mostRecent} />}
     </div>
   );
 };

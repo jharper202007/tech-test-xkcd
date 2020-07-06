@@ -8,6 +8,7 @@ import {
 import './App.css';
 import MostRecent from './components/MostRecent';
 import Navigation from './components/Navigation';
+import SearchPage from './components/SearchPage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Navigation />
         <Switch>
           <Route path="/search">
-            Find comic by id
+            <SearchPage />
           </Route>
           <Route path="/">
             <MostRecent/>
