@@ -51,10 +51,12 @@ export default (state = initialState, action) => {
   }
 
   if (action.type === SEARCH_COMIC_INIT) {
+    const {comics} = state;
+
     return {
       ...state,
       currentSearch: action.payload,
-      isLoading: true,
+      isLoading: !comics[action.payload],
       error: false
     };
   }
