@@ -1,5 +1,3 @@
-import React from 'react';
-
 import reducer from '.';
 import {
   LOAD_COMIC_INIT,
@@ -68,5 +66,56 @@ describe('reducer tests', () => {
     let state = reducer(initialState, action);
     expect(state.error).toBe(true);
     expect(state.isLoading).toBe(false);
+  });
+
+  it('does not call API when searching for a comic we already have data for', () => {
+    const exampleComic = {
+      num: 123,
+      title: 'test',
+      alt: 'test comic'
+    };
+
+    let state = reducer(initialState, {
+      type: LOAD_COMIC_SUCCESS,
+      payload: exampleComic
+    });
+
+    expect(state.comics[123]).toBe(exampleComic);
+
+    state = reducer(state, {
+      type: SEARCH_COMIC_INIT,
+      payload:123
+    });
+
+    expect(state.isLoading).toBe(false);
+    expect(state.comics[123]).toBe(exampleComic);
+    expect(state.currentSearch).toBe(123);
+  });
+
+  it('loads data from API if searching for a comic we do not have data for', () => {
+    let state = reducer(initialState, {
+      type: SEARCH_COMIC_INIT,
+      payload: 123
+    });
+
+    expect(state.isLoading).toBe(true);
+    expect(state.comics[123]).toBe(undefined);
+    expect(state.currentSearch).toBe(123);
+  });
+
+  it('does not set latest comic id on every load', () => {
+    const exampleComic = {
+      num: 123,
+      title: 'test',
+      alt: 'test comic'
+    };
+
+    const action = {
+      type: LOAD_COMIC_SUCCESS,
+      payload: exampleComic
+    };
+
+    let state = reducer(initialState, action);
+    expect(state.latestComicId).toBe(null);
   });
 });
