@@ -2,20 +2,20 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import searchPageSelector from './selector';
-import { searchForComic, loadComic } from './../../actions/xkcd';
+import {searchForComic, loadComic} from './../../actions/xkcd';
 import styles from './search.module.css';
 import Comic from './../Comic';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
   const {isLoading, currentSearchId, selected, error} = useSelector(searchPageSelector);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(currentSearchId || '');
 
   useEffect(() => {
     if (currentSearchId && !selected) {
       dispatch(loadComic(currentSearchId));
     }
-  }, [currentSearchId, selected, dispatch])
+  }, [currentSearchId, selected, dispatch]);
 
   return (
     <div>
@@ -30,7 +30,7 @@ const SearchPage = () => {
       />
       <button
         className={styles.submit}
-        onClick={(e) => {
+        onClick={() => {
           dispatch(searchForComic(searchTerm));
         }}
         disabled={isLoading}
