@@ -11,7 +11,6 @@ const SearchPage = () => {
   const {isLoading, currentSearchId, selected, error} = useSelector(searchPageSelector);
   const [searchTerm, setSearchTerm] = useState('');
 
-
   useEffect(() => {
     if (currentSearchId && !selected) {
       dispatch(loadComic(currentSearchId));
@@ -32,7 +31,6 @@ const SearchPage = () => {
       <button
         className={styles.submit}
         onClick={(e) => {
-          console.log(e);
           dispatch(searchForComic(searchTerm));
         }}
         disabled={isLoading}

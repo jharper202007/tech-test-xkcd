@@ -15,18 +15,20 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  if (action.type === LOAD_COMIC_INIT) {
+  const {type, payload} = action;
+
+  if (type === LOAD_COMIC_INIT) {
     return {
       ...state,
       error: false,
-      isLoading: action.payload
+      isLoading: payload
     };
   }
 
-  if (action.type === LOAD_COMIC_SUCCESS) {
+  if (type === LOAD_COMIC_SUCCESS) {
     const {comics} = state;
 
-    comics[action.payload.num] = action.payload;
+    comics[payload.num] = payload;
     return {
       ...state,
       isLoading: false,
@@ -35,7 +37,7 @@ export default (state = initialState, action) => {
     };
   }
 
-  if (action.type === LOAD_COMIC_ERROR) {
+  if (type === LOAD_COMIC_ERROR) {
     return {
       ...state,
       isLoading: false,
@@ -43,20 +45,20 @@ export default (state = initialState, action) => {
     };
   }
 
-  if (action.type === SET_LATEST_COMIC_ID) {
+  if (type === SET_LATEST_COMIC_ID) {
     return {
       ...state,
-      latestComicId: action.payload
+      latestComicId: payload
     };
   }
 
-  if (action.type === SEARCH_COMIC_INIT) {
+  if (type === SEARCH_COMIC_INIT) {
     const {comics} = state;
 
     return {
       ...state,
-      currentSearch: action.payload,
-      isLoading: !comics[action.payload],
+      currentSearch: payload,
+      isLoading: !comics[payload],
       error: false
     };
   }
