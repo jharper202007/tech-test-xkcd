@@ -15,6 +15,11 @@ const loadComicInit = (id) => ({
   payload: id
 });
 
+/*
+ * NOTE: the 'latest' comic logic is very specific to xkcd.now.sh
+ * if using the official xkcd API, a few changes would be required in this function.
+ * Should not require changes anywhere else though.
+ */
 export const loadComic = (id) => (dispatch) => {
   const xkcd = id === 0 ? 'latest' : id;
   dispatch(loadComicInit(xkcd));
