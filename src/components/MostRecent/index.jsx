@@ -9,9 +9,12 @@ const MostRecent = () => {
   const {mostRecent, isLoading} = useSelector(mostRecentSelector);
 
   useEffect(() => {
-    /** @TODO: check store for comic before loading from API */
-    dispatch(loadComic(0));
-  }, [dispatch]);
+    // If most recent comic does not already exist in store
+    // load it from API
+    if (!mostRecent) {
+      dispatch(loadComic(0));
+    }
+  }, [dispatch, mostRecent]);
 
   return (
     <div>

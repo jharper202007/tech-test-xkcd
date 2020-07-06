@@ -1,0 +1,16 @@
+.navbar li {
+  display: inline;
+  padding-right: 15px;
+}
+
+.navbar a, .navbar a:visited {
+  text-decoration: underline;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.navbar a:hover {
+  color: #aabbcc;
+}
